@@ -1,3 +1,10 @@
+#Name: Shemar Fray
+#Student ID: 20251219
+#Course: Programming Techniques
+#Lecturer: Jonathan Johnson
+#Semester: Summer 2025
+
+
 #Hospital Management System
 #---------------------------------------------------------------------------------------------------------------------
 #Importing necessary modules
@@ -31,7 +38,7 @@ class Person:
 #---------------------------------------------------------------------------------------------------------------------
 #Creating Patient Class (Inherits Person Class)
 class Patient(Person):
-    def __init__(self, name, age, gender,dateofbirth):
+    def __init__(self, name, age, gender, dateofbirth):
         super().__init__(name, age, gender,dateofbirth)
         self.patient_id = generate_id("P")
         self.appointment_list = []
@@ -60,7 +67,7 @@ class Doctor(Person):
     def is_available(self, date, time):
         return is_time_available(self.schedule, date, time)
 
-#This method displays the doctor's schedule
+#This method displays the doctor's scheduled appointments
     def view_schedule(self):
         print(f"Schedule for Dr. {self.name}")
         if self.schedule:
@@ -81,12 +88,12 @@ class Nurse(Person):
     def assign_patient(self, patient):
         self.assigned_patients.append(patient)
 
-#This method views all the patients to a nurse
+#This method views all the patients assigned to a nurse
     def view_assigned_patients(self):
         print(f"\nPatients assigned to Nurse {self.name}:")
         if self.assigned_patients:
             for patient in self.assigned_patients:
-                print(f"- {patient.name} (ID: {patient.patient_id})")
+                print(f"{patient.name} (ID: {patient.patient_id})")
         else:
             print("No patients assigned.")
 
@@ -106,8 +113,8 @@ class Appointment:
 #This method displays confirmed appointment date and time
     def confirmed(self):
         print("\n*Appointment confirmed")
-        print(f"Appointment ID: {self.appointment_id}")
-        print(f"The appointment set for {self.date} at {self.time}.")
+        print(f"*Appointment ID: {self.appointment_id}")
+        print(f"*Appointment date: {self.date} at {self.time}.")
 
 #This method displays canceled appointment
     def cancel(self):
@@ -131,7 +138,7 @@ class HospitalManagement:
         print(f"\n*Patient registered successfully")
         print(f"Patient ID: >>{patient.patient_id}<<\n")
 
-# his method adds a doctor
+#This method adds a doctor
     def add_doctor(self, name, age, gender, dateofbirth, speciality):
         doctor = Doctor(name, age, gender, dateofbirth, speciality)
         self.doctor[doctor.doctor_id] = doctor
@@ -173,8 +180,8 @@ class HospitalManagement:
             doctor.schedule.append((date, time))
             patient.book_appointment(appointment)
             appointment.confirmed()
-            print(f"Doctor: {doctor.name}")
-            print(f"Assigned nurse: {nurse.name}")
+            print(f"*Doctor: Dr.{doctor.name}")
+            print(f"*Assigned nurse: {nurse.name}")
 
 #This method cancels an appointment
     def cancel_appointment(self, appointment_id):
@@ -238,7 +245,7 @@ class HospitalManagement:
         print(f"Balance due:                               ${bal}          ")
         print("------------------------------------------------------------")
 
-
+#---------------------------------------------------------------------------------------------------------------------
 #Main loop for menu display and user input
 def main():
     hospital = HospitalManagement()
@@ -360,9 +367,9 @@ def main():
                     break
             hospital.add_doctor(name, age, gender, dateofbirth, speciality)
 
-            # =======================>
-            # Adding a new nurse
-            # =======================>
+            #=======================>
+            #Adding a new nurse
+            #=======================>
         elif choice == "c":
             # Name validation---------------------------->
             while True:
@@ -372,7 +379,7 @@ def main():
                     print("Invalid name. Your name should only contain letters.")
                 else:
                     break
-            # Age validation---------------------------->
+            #Age validation---------------------------->
             while True:
                 age_str = input("Enter age: ").strip()
                 if not age_str.isdigit():
@@ -383,14 +390,14 @@ def main():
             if age < 18 or age > 75:
                 print("\n***This person is not eligible to work here. The acceptable age is 18-75 years old.***\n")
                 continue
-            # Gender validation------------------------->
+            #Gender validation------------------------->
             while True:
                 gender = input("Enter gender (M / F): ").strip().upper()
                 if gender in ['M', 'F']:
                     break
                 else:
                     print("Invalid gender. Try again")
-            # Date of Birth validation------------------->
+            #Date of Birth validation------------------->
             while True:
                 dateofbirth = input("Enter date of birth (YYYY-MM-DD): ").strip()
                 try:
